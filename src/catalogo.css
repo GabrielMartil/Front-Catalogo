@@ -36,23 +36,11 @@ section {
   justify-content: center;
   font-family: "Lora", serif;
   font-size: 25px;
-  margin-top: 30px;
+  margin-top: 50px;
 }
 
-.categoria-btn button {
-  background-color: transparent;
-  width: 140px;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: #000 solid 3px;
-  border-radius: 13px;
-  font-family: "Luxurious Roman", serif;
-
-}
-
-.categoria-btn button:hover {
-  cursor: pointer;
+section p {
+  margin: 0;
 }
 
 .categoria-btn {
@@ -60,7 +48,35 @@ section {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 10px;
+  padding: 10px;
+}
+
+.categoria-btn button {
+  background-color: transparent;
+  width: 90px;
+  max-width: 140px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: #000 solid 3px;
+  border-radius: 13px;
+  padding: 5px;
+
+}
+
+.categoria-btn a {
+  text-decoration: none;
+}
+
+.categoria-btn p {
+  font-family: "Lora", serif;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.categoria-btn button:hover {
+  cursor: pointer;
 }
 
 .text-header {
