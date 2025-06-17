@@ -116,28 +116,11 @@ export default function Catalogo() {
         <section>
           <p>CATEGORIAS</p>
 
-          <div className='categoria-btn'>
-
-            <a href="#Iphone">
-              <button >
-                <p>Iphone</p>
-              </button>
-            </a>
-            <a href="#IPad">
-              <button>
-                <p>IPad</p>
-              </button>
-            </a>
-            <a href="#MacBook">
-              <button>
-                <p>MacBook</p>
-              </button>
-            </a>
-            <a href="#AppleWatch">
-              <button>
-                <p>Apple Watch</p>
-              </button>
-            </a>
+          <div className="categoria-btn">
+            <a href="#Iphone" className="categoria-link"><p>Iphone</p></a>
+            <a href="#IPad" className="categoria-link"><p>IPad</p></a>
+            <a href="#MacBook" className="categoria-link"><p>MacBook</p></a>
+            <a href="#AppleWatch" className="categoria-link"><p>Apple Watch</p></a>
           </div>
         </section>
 

@@ -52,35 +52,34 @@ section p {
   padding: 10px;
 }
 
-.categoria-btn button {
-  background-color: transparent;
+.categoria-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 90px;
   max-width: 140px;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: #000 solid 3px;
-  border-radius: 13px;
   padding: 5px;
-
-}
-
-.categoria-btn a,
-.categoria-btn a:visited,
-.categoria-btn a:active,
-.categoria-btn a:focus {
-  color: #000;
+  border-bottom: 3px solid #000;
+  border-radius: 13px;
+  background-color: transparent;
   text-decoration: none;
-}
-
-.categoria-btn p {
+  color: #000;
   font-family: "Lora", serif;
   font-weight: 500;
   font-size: 12px;
+  transition: 0.3s ease;
 }
 
-.categoria-btn button:hover {
+.categoria-link:hover {
   cursor: pointer;
+  opacity: 0.7;
+}
+
+/* Garante que no celular o link nunca fique azul */
+.categoria-link:visited,
+.categoria-link:active,
+.categoria-link:focus {
+  color: #000;
 }
 
 .text-header {
