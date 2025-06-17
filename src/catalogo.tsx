@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import './catalogo.css';
 import CartFinalizar from './CartFinalizar/cartfinalizar';
-import "../../catalogo/src/assets/styles/global.css";
+import "../src/assets/styles/global.css";
 
 import Logo from './assets/img/logoaleximports.png';
 import faixa from './assets/img/faixa.png';
