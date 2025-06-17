@@ -68,7 +68,7 @@ export default function Catalogo() {
 
   async function loadProdutos() {
     try {
-      const response = await api.get('/produtos'); // sem filtros
+      const response = await api.get('/produtos');
       setProdutos(response.data);
     } catch (error) {
       console.error('Erro ao carregar produtos:', error);
@@ -144,44 +144,47 @@ export default function Catalogo() {
         <div className='Novos-geral2' id='Iphone'>
           <div className='text-top-Novo'><p>Novos</p></div>
           <div className='Novos-geral'>
-            {iphonesNovos.map((produto) => (
-              <div key={produto.id} className='Novos-div'>
-                {produto.image ? (
-                  <img
-                    src={
-                      produto.image.startsWith("data:image")
-                        ? produto.image
-                        : `data:image/jpeg;base64,${produto.image}`
-                    }
-                    alt={produto.name}
-                    className="produto-imagem"
-                  />
-                ) : (
-                  <div className="produto-imagem-placeholder">
-                    <p>Imagem não disponível</p>
+            {iphonesNovos.length === 0 ? (
+              <p style={{ color: '#eb0000' }}>Nenhum produto cadastrado ainda.</p>
+            ) : (
+              iphonesNovos.map((produto) => (
+                <div key={produto.id} className='Novos-div'>
+                  {produto.image ? (
+                    <img
+                      src={
+                        produto.image.startsWith("data:image")
+                          ? produto.image
+                          : `data:image/jpeg;base64,${produto.image}`
+                      }
+                      alt={produto.name}
+                      className="produto-imagem"
+                    />
+                  ) : (
+                    <div className="produto-imagem-placeholder">
+                      <p>Imagem não disponível</p>
+                    </div>
+                  )}
+                  <div className='Novos-infor'>
+                    <div className='Novo-text'>
+                      <p>{produto.name}</p>
+                      <p>{produto.memoria}GB</p>
+                    </div>
+                    <p>R$ {produto.valor}</p>
+                    <button
+                      onClick={() => setProdutoSelecionado(produto)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      <FaShoppingCart />
+                      COMPRAR
+                    </button>
                   </div>
-                )}
-                <div className='Novos-infor'>
-                  <div className='Novo-text'>
-                    <p>{produto.name}</p>
-                    <p>{produto.memoria}GB</p>
-                  </div>
-                  <p>R$ {produto.valor}</p>
-                  <button
-                    onClick={() => setProdutoSelecionado(produto)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    <FaShoppingCart />
-                    COMPRAR
-                  </button>
                 </div>
-              </div>
-            ))}
+              )))}
           </div>
           {produtoSelecionado && (
             <CartFinalizar
@@ -208,39 +211,42 @@ export default function Catalogo() {
         </div>
         <div>
           <div className='Seminovos-geral'>
-            {iphonesSeminovos.map((produto) => (
-              <div className='Seminovos'>
-                <div className='Seminovos-div'>
-                  <div className='Seminovos-infor'>
-                    <div className='Seminovos-text'>
-                      <p> {produto.name}</p>
-                      <p style={{ lineHeight: 0 }}> {produto.memoria}GB </p>
+            {iphonesSeminovos.length === 0 ? (
+              <p style={{ color: '#eb0000' }}>Nenhum produto cadastrado ainda.</p>
+            ) : (
+              iphonesSeminovos.map((produto) => (
+                <div className='Seminovos'>
+                  <div className='Seminovos-div'>
+                    <div className='Seminovos-infor'>
+                      <div className='Seminovos-text'>
+                        <p> {produto.name}</p>
+                        <p style={{ lineHeight: 0 }}> {produto.memoria}GB </p>
+                      </div>
+                      <div style={{ display: "flex", alignItems: "center", lineHeight: 0 }}>
+                        <p style={{ lineHeight: 0 }}>{produto.bateria}% </p>
+                        <img src={bateria} alt="bateria" style={{
+                          width: 20, height: 20
+                        }} />
+                      </div>
+                      <p style={{ lineHeight: 0, margin: 8 }}>R$ {produto.valor}</p>
                     </div>
-                    <div style={{ display: "flex", alignItems: "center", lineHeight: 0 }}>
-                      <p style={{ lineHeight: 0 }}>{produto.bateria}% </p>
-                      <img src={bateria} alt="bateria" style={{
-                        width: 20, height: 20
-                      }} />
-                    </div>
-                    <p style={{ lineHeight: 0, margin: 8 }}>R$ {produto.valor}</p>
+                  </div>
+                  <div className='Seminovos-infor-btn'>
+                    <button
+                      onClick={() => setProdutoSelecionado(produto)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      <FaShoppingCart />
+                      COMPRAR
+                    </button>
                   </div>
                 </div>
-                <div className='Seminovos-infor-btn'>
-                  <button
-                    onClick={() => setProdutoSelecionado(produto)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    <FaShoppingCart />
-                    COMPRAR
-                  </button>
-                </div>
-              </div>
-            ))}
+              )))}
           </div>
         </div>
 
@@ -249,44 +255,47 @@ export default function Catalogo() {
         </div>
         <div>
           <div className='IPad-geral'>
-            {ipadsNovos.map((produto) => (
-              <div key={produto.id} className='Novos-div-IPad'>
-                {produto.image ? (
-                  <img
-                    src={
-                      produto.image.startsWith("data:image")
-                        ? produto.image
-                        : `data:image/jpeg;base64,${produto.image}`
-                    }
-                    alt={produto.name}
-                    className="produto-imagem"
-                  />
-                ) : (
-                  <div className="produto-imagem-placeholder">
-                    <p>Imagem não disponível</p>
+            {ipadsNovos.length === 0 ? (
+              <p style={{ color: '#eb0000' }}>Nenhum produto cadastrado ainda.</p>
+            ) : (
+              ipadsNovos.map((produto) => (
+                <div key={produto.id} className='Novos-div-IPad'>
+                  {produto.image ? (
+                    <img
+                      src={
+                        produto.image.startsWith("data:image")
+                          ? produto.image
+                          : `data:image/jpeg;base64,${produto.image}`
+                      }
+                      alt={produto.name}
+                      className="produto-imagem"
+                    />
+                  ) : (
+                    <div className="produto-imagem-placeholder">
+                      <p>Imagem não disponível</p>
+                    </div>
+                  )}
+                  <div className='Novos-infor-IPad'>
+                    <div className='Novo-text-IPad'>
+                      <p> {produto.name} </p>
+                      <p> {produto.memoria}GB </p>
+                    </div>
+                    <p>R$ {produto.valor}</p>
+                    <button
+                      onClick={() => setProdutoSelecionado(produto)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      <FaShoppingCart />
+                      COMPRAR
+                    </button>
                   </div>
-                )}
-                <div className='Novos-infor-IPad'>
-                  <div className='Novo-text-IPad'>
-                    <p> {produto.name} </p>
-                    <p> {produto.memoria}GB </p>
-                  </div>
-                  <p>R$ {produto.valor}</p>
-                  <button
-                    onClick={() => setProdutoSelecionado(produto)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    <FaShoppingCart />
-                    COMPRAR
-                  </button>
                 </div>
-              </div>
-            ))}
+              )))}
           </div>
         </div>
 
@@ -296,52 +305,55 @@ export default function Catalogo() {
 
         <div className='macbok-geral'>
           <div className='macbok-geral'>
-            {macbooks.map((produto) => (
-              <div key={produto.id} className='macbok-conteiner'>
-                {produto.image ? (
-                  <img
-                    src={
-                      produto.image.startsWith("data:image")
-                        ? produto.image
-                        : `data:image/jpeg;base64,${produto.image}`
-                    }
-                    alt={produto.name}
-                    className="macbok-produto-imagem"
-                  />
-                ) : (
-                  <div className="produto-imagem-placeholder">
-                    <p>Imagem não disponível</p>
+            {macbooks.length === 0 ? (
+              <p style={{ color: '#eb0000' }}>Nenhum produto cadastrado ainda.</p>
+            ) : (
+              macbooks.map((produto) => (
+                <div key={produto.id} className='macbok-conteiner'>
+                  {produto.image ? (
+                    <img
+                      src={
+                        produto.image.startsWith("data:image")
+                          ? produto.image
+                          : `data:image/jpeg;base64,${produto.image}`
+                      }
+                      alt={produto.name}
+                      className="macbok-produto-imagem"
+                    />
+                  ) : (
+                    <div className="produto-imagem-placeholder">
+                      <p>Imagem não disponível</p>
+                    </div>
+                  )}
+                  <div className='Novos-infor-macbok'>
+                    <div className='Novo-text-macbok'>
+                      <p> {produto.name} </p>
+                      <p>{produto.descricao}</p>
+                      <p> {produto.memoria}GB </p>
+                    </div>
+                    <p style={{ marginTop: 10, marginBottom: 5 }}>R$ {produto.valor}</p>
+                    <button
+                      onClick={() => setProdutoSelecionado(produto)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      <FaShoppingCart />
+                      COMPRAR
+                    </button>
                   </div>
-                )}
-                <div className='Novos-infor-macbok'>
-                  <div className='Novo-text-macbok'>
-                    <p> {produto.name} </p>
-                    <p>{produto.descricao}</p>
-                    <p> {produto.memoria}GB </p>
-                  </div>
-                  <p style={{ marginTop: 10, marginBottom: 5 }}>R$ {produto.valor}</p>
-                  <button
-                    onClick={() => setProdutoSelecionado(produto)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    <FaShoppingCart />
-                    COMPRAR
-                  </button>
                 </div>
-              </div>
-            ))}
+              )))}
           </div>
         </div>
 
         <div
           className="faixa_div"
           ref={divRef}
-          style={{ width: '100%', overflow: 'hidden' }} // Ajuste a altura aqui
+          style={{ width: '100%', overflow: 'hidden' }}
         >
           {Array.from({ length: paragraphCount }).map((_, index) => (
             <p key={index} style={{ margin: 0 }}>@alemimporsfortal</p>
@@ -358,44 +370,47 @@ export default function Catalogo() {
 
         <div className='relogio-geral'>
           <div className='macbok-geral'>
-            {AppleWatch.map((produto) => (
-              <div key={produto.id} className='watch-conteiner'>
-                {produto.image ? (
-                  <img
-                    src={
-                      produto.image.startsWith("data:image")
-                        ? produto.image
-                        : `data:image/jpeg;base64,${produto.image}`
-                    }
-                    alt={produto.name}
-                    className="produto-imagem"
-                  />
-                ) : (
-                  <div className="produto-imagem-placeholder">
-                    <p>Imagem não disponível</p>
+            {AppleWatch.length === 0 ? (
+              <p style={{ color: '#eb0000' }}>Nenhum produto cadastrado ainda.</p>
+            ) : (
+              AppleWatch.map((produto) => (
+                <div key={produto.id} className='watch-conteiner'>
+                  {produto.image ? (
+                    <img
+                      src={
+                        produto.image.startsWith("data:image")
+                          ? produto.image
+                          : `data:image/jpeg;base64,${produto.image}`
+                      }
+                      alt={produto.name}
+                      className="produto-imagem"
+                    />
+                  ) : (
+                    <div className="produto-imagem-placeholder">
+                      <p>Imagem não disponível</p>
+                    </div>
+                  )}
+                  <div className='Novos-infor-geral'>
+                    <div className='Novo-text-geral'>
+                      <p> {produto.name}</p>
+                      <p>{produto.descricao}</p>
+                    </div>
+                    <p>R$ {produto.valor}</p>
+                    <button
+                      onClick={() => setProdutoSelecionado(produto)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      <FaShoppingCart />
+                      COMPRAR
+                    </button>
                   </div>
-                )}
-                <div className='Novos-infor-geral'>
-                  <div className='Novo-text-geral'>
-                    <p> {produto.name}</p>
-                    <p>{produto.descricao}</p>
-                  </div>
-                  <p>R$ {produto.valor}</p>
-                  <button
-                    onClick={() => setProdutoSelecionado(produto)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    <FaShoppingCart />
-                    COMPRAR
-                  </button>
                 </div>
-              </div>
-            ))}
+              )))}
           </div>
 
         </div>
