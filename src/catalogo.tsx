@@ -95,35 +95,7 @@ export default function Catalogo() {
     (p) => p.categoria?.toLowerCase() === 'applewatch'
   );
 
-  const generateWhatsAppLink = (
-    ownerPhoneNumber: string,
-    productName: string,
-    productMemoria: string,
-    productBateria: string,
-    productValor: string,
-    clientName: string,
-    clientPhone: string,
-    clientAddress: string
-  ) => {
-    const message =
-      `📦 *Produto:* ${productName}
-*Memoria:* ${productMemoria}
-*Bateria:* ${productBateria}
-*Valor:* ${productValor}
-
-👤 *Cliente:* ${clientName}
-📞 *Telefone:* ${clientPhone}
-📍 *Endereço:* ${clientAddress}`;
-
-    const encodedMessage = encodeURIComponent(message);
-
-    return `https://api.whatsapp.com/send?phone=${ownerPhoneNumber}&text=${encodedMessage}`;
-  };
-
   const ownerPhoneNumber = '5585999268278';
-  const clientName = 'João da Silva';
-  const clientPhone = '5585987654321';
-  const clientAddress = 'Rua Verde 42, 95, Sitio São joãp';
 
   return (
     <div className="catalogo">
@@ -211,8 +183,6 @@ export default function Catalogo() {
               </div>
             ))}
           </div>
-
-          {/* Modal aparece se tiver um produto selecionado */}
           {produtoSelecionado && (
             <CartFinalizar
               produto={produtoSelecionado}
