@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import './catalogo.css';
 import CartFinalizar from './CartFinalizar/cartfinalizar';
 import "../src/assets/styles/global.css";
+import produto_sem_foto from './assets/img/sem-foto.png';
 
 import Logo from './assets/img/logoaleximports.png';
 import faixa from './assets/img/faixa.png';
@@ -130,44 +131,46 @@ export default function Catalogo() {
             {iphonesNovos.length === 0 ? (
               <p style={{ color: '#eb0000' }}>Nenhum produto cadastrado ainda.</p>
             ) : (
-              iphonesNovos.map((produto) => (
-                <div key={produto.id} className='Novos-div'>
-                  {produto.image ? (
+              iphonesNovos.map((produto) => {
+                const isImagemValida = produto.image && produto.image.length > "data:image/jpeg;base64,".length;
+
+                return (
+                  <div key={produto.id} className='Novos-div'>
                     <img
                       src={
-                        produto.image.startsWith("data:image")
-                          ? produto.image
-                          : `data:image/jpeg;base64,${produto.image}`
+                        isImagemValida
+                          ? (produto.image.startsWith("data:image")
+                            ? produto.image
+                            : `data:image/jpeg;base64,${produto.image}`)
+                          : produto_sem_foto
                       }
                       alt={produto.name}
                       className="produto-imagem"
+                      style={{ maxWidth:'140px'}}
                     />
-                  ) : (
-                    <div className="produto-imagem-placeholder">
-                      <p>Imagem não disponível</p>
+                    <div className='Novos-infor'>
+                      <div className='Novo-text'>
+                        <p>{produto.name}</p>
+                        <p>{produto.memoria}GB</p>
+                      </div>
+                      <p>R$ {produto.valor}</p>
+                      <button
+                        onClick={() => setProdutoSelecionado(produto)}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '8px',
+                          justifyContent: 'center'
+                        }}
+                      >
+                        <FaShoppingCart />
+                        COMPRAR
+                      </button>
                     </div>
-                  )}
-                  <div className='Novos-infor'>
-                    <div className='Novo-text'>
-                      <p>{produto.name}</p>
-                      <p>{produto.memoria}GB</p>
-                    </div>
-                    <p>R$ {produto.valor}</p>
-                    <button
-                      onClick={() => setProdutoSelecionado(produto)}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        justifyContent: 'center'
-                      }}
-                    >
-                      <FaShoppingCart />
-                      COMPRAR
-                    </button>
                   </div>
-                </div>
-              )))}
+                );
+              })
+            )}
           </div>
           {produtoSelecionado && (
             <CartFinalizar
@@ -241,45 +244,47 @@ export default function Catalogo() {
             {ipadsNovos.length === 0 ? (
               <p style={{ color: '#eb0000' }}>Nenhum produto cadastrado ainda.</p>
             ) : (
-              ipadsNovos.map((produto) => (
-                <div key={produto.id} className='Novos-div-IPad'>
-                  {produto.image ? (
+              ipadsNovos.map((produto) => {
+                const isImagemValida = produto.image && produto.image.length > "data:image/jpeg;base64,".length;
+                return (
+                  <div key={produto.id} className='Novos-div-IPad'>
                     <img
                       src={
-                        produto.image.startsWith("data:image")
-                          ? produto.image
-                          : `data:image/jpeg;base64,${produto.image}`
+                        isImagemValida
+                          ? (produto.image.startsWith("data:image")
+                            ? produto.image
+                            : `data:image/jpeg;base64,${produto.image}`)
+                          : produto_sem_foto
                       }
                       alt={produto.name}
                       className="produto-imagem"
+                      style={{ maxWidth: '170px' }}
                     />
-                  ) : (
-                    <div className="produto-imagem-placeholder">
-                      <p>Imagem não disponível</p>
+                    <div className='Novos-infor-IPad'>
+                      <div className='Novo-text-IPad'>
+                        <p> {produto.name} </p>
+                        <p> {produto.memoria}GB </p>
+                      </div>
+                      <p>R$ {produto.valor}</p>
+                      <button
+                        onClick={() => setProdutoSelecionado(produto)}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '8px',
+                          justifyContent: 'center'
+                        }}
+                      >
+                        <FaShoppingCart />
+                        COMPRAR
+                      </button>
                     </div>
-                  )}
-                  <div className='Novos-infor-IPad'>
-                    <div className='Novo-text-IPad'>
-                      <p> {produto.name} </p>
-                      <p> {produto.memoria}GB </p>
-                    </div>
-                    <p>R$ {produto.valor}</p>
-                    <button
-                      onClick={() => setProdutoSelecionado(produto)}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        justifyContent: 'center'
-                      }}
-                    >
-                      <FaShoppingCart />
-                      COMPRAR
-                    </button>
                   </div>
-                </div>
-              )))}
+                );
+              })
+            )}
           </div>
+
         </div>
 
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }} id='MacBook'>
